@@ -1,0 +1,23 @@
+---
+loopback: 10.0.0.3/32
+
+bgp_fabric:
+  asn: 64701
+  router_id: 10.0.0.3
+  neighbor:
+    - e101-006-0
+    - e101-014-0
+
+interfaces:
+  e101-006-0:
+    alias: spine1
+    address: "{{ loopback }}"
+
+  e101-014-0:
+    alias: spine2
+    address: "{{ loopback }}"
+
+  e101-033-0:
+    alias: server1
+    address: 10.1.1.1/24
+    

@@ -1,0 +1,25 @@
+---
+- name: write hostname
+  lineinfile: dest=/etc/hostname
+              regexp='^' backrefs=no
+              line='{{ inventory_hostname }}'
+              state=present
+  notify: apply hostname 
+
+- name: Check if ifupdown2 Package is installed
+  shell: dpkg -s ifupdown2 | grep 'install ok installed'
+  register: is_installed
+  failed_when: no
+  changed_when: no
+
+- name: Install ifupdown2
+  apt:
+    name: ifupdown2 
+    update_cache: yes 
+    state: latest
+  when: is_installed.rc != 0
+
+- name: Configure the interfaces
+  template: src=templates/interfaces_config.j2
+            dest=/etc/network/interfaces owner=root group=root mode=0644
+  notify: reload networking

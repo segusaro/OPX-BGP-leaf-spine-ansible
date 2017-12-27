@@ -1,0 +1,43 @@
+!
+frr defaults traditional
+!
+service integrated-vtysh-config
+!
+log file /var/log/frr/frr.log
+!
+{% if bgp_fabric is defined %}
+{% if bgp_fabric.neighbor is defined %}
+{% for item in bgp_fabric.neighbor %}
+interface {{ item }}
+ ipv6 nd ra-interval 10
+ no ipv6 nd suppress-ra
+!
+{% endfor %}
+{% endif %}
+!
+ip prefix-list DC_LOCAL_SUBNET seq 5 permit 10.1.0.0/16 le 24
+ip prefix-list DC_LOCAL_SUBNET seq 10 permit 10.0.0.0/24 le 32
+!
+route-map ACCEPT_DC_LOCAL permit 10
+ match ip address prefix-list DC_LOCAL_SUBNET
+!
+router bgp {{ bgp_fabric.asn }}
+ bgp router-id {{ bgp_fabric.router_id }}
+ bgp bestpath as-path multipath-relax
+ bgp log-neighbor-changes
+ timers bgp 3 9
+ neighbor spine-leaf peer-group
+ neighbor spine-leaf remote-as external
+{% for item in bgp_fabric.neighbor %}
+ neighbor {{ item }} interface peer-group spine-leaf
+{% endfor %}
+ !
+ address-family ipv4 unicast
+  redistribute connected route-map ACCEPT_DC_LOCAL
+ exit-address-family
+!
+{% endif %}
+!
+line vty
+!
+end

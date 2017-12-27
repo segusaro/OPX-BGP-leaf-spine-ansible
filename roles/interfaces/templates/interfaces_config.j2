@@ -1,0 +1,38 @@
+## File Managed by Ansible ##
+# interfaces(5) file used by ifup(8) and ifdown(8)
+# Include files from /etc/network/interfaces.d:
+
+auto eth0
+allow-hotplug eth0
+iface eth0 inet dhcp
+
+{% if loopback is defined %}
+auto lo
+iface lo inet loopback
+    address {{ loopback }}
+{% endif %}
+
+{% if interfaces is defined %}
+{% for port, value in interfaces.items() %}
+auto {{ port }}
+iface {{ port }}
+{% if 'alias' in value %}
+    alias {{ value.alias }}
+{% endif %}
+{% if value and 'link_speed' in value %}
+    link-speed {{ value['link_speed'] }}
+{% endif %}
+{% if value and 'link_duplex' in value %}
+    link-duplex {{ value['link_duplex']|ternary('full', 'half') }}
+{% endif %}
+{% if value and 'mtu' in value %}
+    mtu {{ value.mtu }}
+{% endif %}
+{% if value and 'address' in value %}
+    address {{ value.address }}
+{% endif %}
+
+{% endfor %}
+{% endif %}
+
+

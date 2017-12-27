@@ -1,0 +1,19 @@
+---
+loopback: 10.0.0.1/32
+
+bgp_fabric:
+  asn: 64600
+  router_id: 10.0.0.1
+  neighbor:
+    - e101-006-0
+    - e101-008-0
+
+interfaces:
+  e101-006-0:
+    alias: leaf1
+    address: "{{ loopback }}"
+
+  e101-008-0:
+    alias: leaf2
+    address: "{{ loopback }}"
+ 

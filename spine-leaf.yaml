@@ -1,0 +1,22 @@
+---
+- hosts: datacenter
+  become: 'True'
+  gather_facts: 'False'
+
+  handlers:
+    - name: apply hostname
+      command: hostname -F /etc/hostname
+      
+    - name: reload networking
+      command: "{{item}}"
+      with_items:
+        - ifreload -a
+        - sleep 10
+
+    - name: reload frr
+      service: name=frr state=reloaded
+
+  roles:
+    - interfaces
+    - frr 
+
