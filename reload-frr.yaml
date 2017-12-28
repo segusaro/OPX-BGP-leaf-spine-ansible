@@ -1,0 +1,8 @@
+---
+- hosts: datacenter
+  become: 'True'
+  gather_facts: 'False'
+
+  tasks:
+  - name: reload frr
+    service: name=frr state=restarted

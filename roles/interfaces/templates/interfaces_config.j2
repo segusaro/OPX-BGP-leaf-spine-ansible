@@ -15,7 +15,7 @@ iface lo inet loopback
 {% if interfaces is defined %}
 {% for port, value in interfaces.items() %}
 auto {{ port }}
-iface {{ port }}
+iface {{ port }} inet static
 {% if 'alias' in value %}
     alias {{ value.alias }}
 {% endif %}

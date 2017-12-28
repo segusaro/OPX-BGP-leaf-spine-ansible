@@ -24,6 +24,7 @@ route-map ACCEPT_DC_LOCAL permit 10
 router bgp {{ bgp_fabric.asn }}
  bgp router-id {{ bgp_fabric.router_id }}
  bgp bestpath as-path multipath-relax
+ bgp bestpath compare-routerid
  bgp log-neighbor-changes
  timers bgp 3 9
  neighbor spine-leaf peer-group

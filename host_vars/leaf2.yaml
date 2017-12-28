@@ -16,3 +16,7 @@ interfaces:
   e101-016-0:
     alias: spine2
     address: "{{ loopback }}"
+
+  e101-033-0:
+    alias: server1
+    address: 10.1.1.1/24
