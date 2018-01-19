@@ -7,13 +7,21 @@ bgp_fabric:
   neighbor:
     - e101-006-0
     - e101-008-0
+    - e101-032-0
 
 interfaces:
   e101-006-0:
     alias: leaf1
     address: "{{ loopback }}"
+    link_speed: 100000
 
   e101-008-0:
     alias: leaf2
     address: "{{ loopback }}"
+    link_speed: 100000
+
+  e101-032-0:
+    alias: leaf3
+    address: "{{ loopback }}"
+    link_speed: 40000
  

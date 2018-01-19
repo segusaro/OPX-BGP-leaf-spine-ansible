@@ -2,7 +2,7 @@ spine1 ansible_host=192.168.114.202 ansible_net_os_name="openswitch"
 spine2 ansible_host=192.168.114.203 ansible_net_os_name="openswitch"
 leaf1 ansible_host=192.168.114.204 ansible_net_os_name="openswitch"
 leaf2 ansible_host=192.168.114.205 ansible_net_os_name="openswitch"
-# leaf3 ansible_host=192.168.114.206 ansible_net_os_name="openswitch"
+leaf3 ansible_host=192.168.114.206 ansible_net_os_name="openswitch"
 
 [spine]
 spine1
@@ -11,7 +11,7 @@ spine2
 [leaf]
 leaf1
 leaf2
-# leaf3
+leaf3
 
 [datacenter:children]
 spine

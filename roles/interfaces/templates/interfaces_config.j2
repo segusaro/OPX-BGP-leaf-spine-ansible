@@ -20,13 +20,10 @@ iface {{ port }} inet static
     alias {{ value.alias }}
 {% endif %}
 {% if value and 'link_speed' in value %}
-    link-speed {{ value['link_speed'] }}
+    pre-up sudo /usr/bin/opx-ethtool -s {{ port }} speed {{ value.link_speed }}
 {% endif %}
-{% if value and 'link_duplex' in value %}
-    link-duplex {{ value['link_duplex']|ternary('full', 'half') }}
-{% endif %}
-{% if value and 'mtu' in value %}
-    mtu {{ value.mtu }}
+{% if value and 'negotiation' in value %}
+    pre-up /usr/bin/opx-ethtool -s {{ port }} autoneg {{ value.negotiation }}
 {% endif %}
 {% if value and 'address' in value %}
     address {{ value.address }}
