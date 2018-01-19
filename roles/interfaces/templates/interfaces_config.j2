@@ -23,7 +23,7 @@ iface {{ port }} inet static
     pre-up sudo /usr/bin/opx-ethtool -s {{ port }} speed {{ value.link_speed }}
 {% endif %}
 {% if value and 'negotiation' in value %}
-    pre-up /usr/bin/opx-ethtool -s {{ port }} autoneg {{ value.negotiation }}
+    pre-up sudo /usr/bin/opx-ethtool -s {{ port }} autoneg {{ value.negotiation }}
 {% endif %}
 {% if value and 'address' in value %}
     address {{ value.address }}
