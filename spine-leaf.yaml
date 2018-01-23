@@ -8,15 +8,17 @@
       command: hostname -F /etc/hostname
       
     - name: reload networking
-      command: "{{item}}"
-      with_items:
-        - ifreload -a
-        - sleep 10
+      command: "ifreload -a"
 
     - name: reload frr
-      service: name=frr state=reloaded
+      service: name=frr state=restarted
+
+    - name: reload fanout
+      service: name=opx-create-interface state=restarted
 
   roles:
+    - interfaces_fanout 
     - interfaces
-    - frr 
+    - frr
+
 

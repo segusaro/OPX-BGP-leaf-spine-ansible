@@ -12,9 +12,7 @@ interfaces:
   e101-008-0:
     alias: spine1
     address: "{{ loopback }}"
-    link_speed: 100000
 
   e101-016-0:
     alias: spine2
     address: "{{ loopback }}"
-    link_speed: 100000

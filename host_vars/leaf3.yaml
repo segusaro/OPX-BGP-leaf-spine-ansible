@@ -12,14 +12,11 @@ interfaces:
   e101-053-0:
     alias: spine1
     address: "{{ loopback }}"
-    link_speed: 40000
 
   e101-054-0:
     alias: spine2
     address: "{{ loopback }}"
-    link_speed: 40000
 
   e101-048-0:
     alias: server2
     address: 10.1.2.1/24
-    link_speed: 10000

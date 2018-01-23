@@ -7,20 +7,22 @@ bgp_fabric:
   neighbor:
     - e101-014-0
     - e101-016-0
-    - e101-032-0
-    
+    - e101-032-1
+
+interfaces_fanout:
+   e101-032-0:
+    fanout: 1x1
+    speed: 40G
+ 
 interfaces:
   e101-014-0:
     alias: leaf1
     address: "{{ loopback }}"
-    link_speed: 100000
 
   e101-016-0:
     alias: leaf2
     address: "{{ loopback }}"
-    link_speed: 100000
 
-  e101-032-0:
+  e101-032-1:
     alias: leaf3
     address: "{{ loopback }}" 
-    link_speed: 40000
