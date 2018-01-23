@@ -1,7 +1,0 @@
-{% if interfaces_fanout is defined %}
-<interfaces>
-{% for port, value in interfaces_fanout.items() %}
-   <interface name="{{ port }}" fanout="{{ value.fanout }}" speed="{{ value.speed }}"/>
-{% endfor %}
-</interfaces>
-{% endif %}
